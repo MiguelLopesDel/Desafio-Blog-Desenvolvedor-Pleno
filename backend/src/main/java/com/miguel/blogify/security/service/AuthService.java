@@ -6,26 +6,50 @@ import com.miguel.blogify.domain.exception.UserNotFoundException;
 import com.miguel.blogify.repository.UserRepository;
 import com.miguel.blogify.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final TokenProvider jwtService;
+
+    private final AuthenticationManager authenticationManager;
+    private final TokenProvider tokenProvider;
 
     public String authenticate(AuthDTO authDTO) {
-        User user = userRepository.findByEmail(authDTO.email())
-                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado!"));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        authDTO.email(),
+                        authDTO.password()
+                )
+        );
 
-        if (!passwordEncoder.matches(authDTO.password(), user.getPassword())) {
-            throw new BadCredentialsException("Senha incorreta!");
+        User user = (User) authentication.getPrincipal();
+        return tokenProvider.generateToken(user);
+    }
+
+    public Map<String, Object> validateToken(String authHeader) {
+        String valid = "valid";
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return Map.of(valid, false);
         }
 
-        return jwtService.generateToken(user);
+        try {
+            String jwt = authHeader.substring(7);
+            String username = tokenProvider.validateAndExtractUsername(jwt);
+            return Map.of(valid, true, "username", username);
+        } catch (Exception e) {
+            return Map.of(valid, false);
+        }
     }
 }
 
