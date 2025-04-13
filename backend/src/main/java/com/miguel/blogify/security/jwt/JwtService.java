@@ -14,6 +14,8 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.function.Function;
 
+import static com.miguel.blogify.domain.type.UserRole.ADMIN;
+
 @Service
 public class JwtService implements TokenProvider {
     @Value("${jwt.secret-key}")
@@ -22,6 +24,9 @@ public class JwtService implements TokenProvider {
     public String generateToken(User user) {
         return Jwts.builder()
                 .subject(user.getEmail())
+                .claim("isAdmin", user.getRoles().contains(ADMIN))
+                .claim("userId", user.getId())
+                .claim("name", user.getName())
                 .issuedAt(new Date())
                 .expiration(Date.from(Instant.now().plusSeconds(7200)))
                 .signWith(getSignInKey(), Jwts.SIG.HS256)
