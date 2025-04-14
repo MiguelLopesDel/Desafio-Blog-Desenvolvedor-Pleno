@@ -36,21 +36,19 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EmailAlreadyExistException.class)
-    public ResponseEntity<ErrorResponse> handleEmailAlreadyExistsException(EmailAlreadyExistException ex) {
+    public ResponseEntity<ErrorResponse> handleEmailAlreadyExistException(EmailAlreadyExistException ex) {
         log.info("Email já cadastrado");
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse() {
-            @Override
-            public HttpStatusCode getStatusCode() {
-                return HttpStatus.CONFLICT;
-            }
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(createErrorResponse(ex, HttpStatus.CONFLICT));
+    }
 
-            @Override
-            public ProblemDetail getBody() {
-                ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.CONFLICT);
-                problemDetail.setDetail(ex.getMessage());
-                return problemDetail;
-            }
-        });
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(createErrorResponse(ex, HttpStatus.BAD_REQUEST));
+    }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    public ResponseEntity<ErrorResponse> handleTokenExpiredException(TokenExpiredException ex) {
+        return ResponseEntity.status(HttpStatus.GONE).body(createErrorResponse(ex, HttpStatus.GONE));
     }
 
     private ErrorResponse createErrorResponse(Exception ex, HttpStatus status) {
