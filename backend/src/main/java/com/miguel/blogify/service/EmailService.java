@@ -22,7 +22,6 @@ public class EmailService {
             helper.setText(content, true);
             helper.setTo(to);
             helper.setSubject(subject);
-//            helper.setFrom("no-reply@blogify.com");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             throw new IllegalStateException("Falha ao enviar email", e);

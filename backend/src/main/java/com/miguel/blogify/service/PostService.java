@@ -61,7 +61,7 @@ public class PostService {
         return postRepository.findByIsPrivateAndActiveTrue(false, pageable).map(postMapper::toResponse);
     }
 
-    @Cacheable(value = "postDetails", key = "#id", condition = "!#result.isPrivate()")
+    @Cacheable(value = "postDetails", key = "#id", unless = "#result.isPrivate()")
     public PostResponse getPostById(Long id, Authentication authentication) {
         log.info("Buscando post por ID: {}", id);
         Post post = findPostById(id);
