@@ -2,4 +2,6 @@ package com.miguel.blogify.domain.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record PostRequest(@NotBlank String title, @NotBlank String content) {}
+import java.util.List;
+
+public record PostRequest(@NotBlank String title, @NotBlank String content, List<String> tags, boolean isPrivate) {}
