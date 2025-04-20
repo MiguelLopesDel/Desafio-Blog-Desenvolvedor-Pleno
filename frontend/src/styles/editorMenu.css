@@ -1,0 +1,49 @@
+:root {
+    --menu-bg: #ffffff;
+    --menu-text: #333333;
+    --menu-hover: #f0f2ff;
+    --menu-border: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --accent-color: #4a6ee0;
+
+    --editor-button-bg: rgba(100, 108, 255, 0.1);
+    --editor-button-text: #646cff;
+    --editor-button-hover: rgba(100, 108, 255, 0.2);
+}
+
+[data-theme="dark"] {
+    --menu-bg: #ffffff;
+    --menu-text: #000000;
+    --menu-hover: #e0e0ff;
+    --menu-border: #bbbbbb;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --accent-color: #7579ff;
+
+    --editor-button-bg: rgba(100, 108, 255, 0.3);
+    --editor-button-text: #a5a9ff;
+    --editor-button-hover: rgba(100, 108, 255, 0.5);
+}
+
+.ce-toolbar__plus {
+    color: var(--editor-button-text) !important;
+    background-color: var(--editor-button-bg) !important;
+    border: 1px solid var(--menu-border) !important;
+}
+
+.ce-toolbar__settings-btn {
+    color: var(--editor-button-text) !important;
+    background-color: var(--editor-button-bg) !important;
+    border: 1px solid var(--menu-border) !important;
+}
+
+.ce-toolbar__plus:hover,
+.ce-toolbar__settings-btn:hover {
+    background-color: var(--editor-button-hover) !important;
+}
+
+.ce-popover__container {
+    background-color: var(--menu-bg) !important;
+    border: 1px solid var(--menu-border) !important;
+    box-shadow: 0 3px 15px var(--shadow-color) !important;
+    color: var(--menu-text) !important;
+}

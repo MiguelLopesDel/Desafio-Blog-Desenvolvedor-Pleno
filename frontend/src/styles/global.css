@@ -1,0 +1,529 @@
+:root {
+    --primary-rgb: 100, 108, 255;
+    --accent-rgb: 131, 88, 255;
+
+    --bg-color: #ffffff;
+    --text-color: #213547;
+    --card-bg: #f5f5f5;
+    --border-color: #ddd;
+    --button-bg: rgb(var(--primary-rgb));
+    --button-text: white;
+    --input-bg: white;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --accent-color: rgb(var(--accent-rgb));
+    --heading-color: #333;
+    --secondary-text-color: #666;
+    --accent-hover-color: #535bf2;
+    --secondary-bg: #f0f0f0;
+}
+
+[data-theme='dark'] {
+    --bg-color: #121212;
+    --text-color: rgba(255, 255, 255, 0.87);
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+    --button-bg: rgb(var(--primary-rgb));
+    --button-text: white;
+    --input-bg: #2a2a2a;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --accent-color: rgb(var(--accent-rgb));
+    --heading-color: #eee;
+    --secondary-text-color: #aaa;
+    --accent-hover-color: #7579ff;
+    --secondary-bg: #2c2c2c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.main-content {
+    flex: 1;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+.container,
+.home-container,
+.auth-container,
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-container {
+    text-align: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.auth-container {
+    max-width: 420px;
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.home-description {
+    margin: 20px 0 40px;
+    max-width: 600px;
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.primary-button, .secondary-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.primary-button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    box-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.3);
+}
+
+.primary-button:hover {
+    background-color: rgb(83, 91, 242);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.5);
+}
+
+.secondary-button {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.secondary-button:hover {
+    background-color: rgba(var(--accent-rgb), 0.1);
+    transform: translateY(-2px);
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logout-button {
+    width: auto;
+    padding: 8px 20px;
+    background-color: #f44336;
+}
+
+.logout-button:hover {
+    background-color: #d32f2f;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.user-profile {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.profile-info {
+    margin-top: 20px;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+}
+
+.loading-container, .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.error-message {
+    color: #dc3545;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.view-button, .edit-button, .delete-button {
+    padding: 6px 12px;
+    margin-right: 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-button {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.view-button:hover {
+    background-color: var(--accent-hover-color);
+}
+
+.edit-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #388e3c;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.admin-dashboard {
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.dashboard-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.tab-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--secondary-text-color);
+}
+
+.tab-button.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.posts-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.search-input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 300px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.posts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.posts-table th,
+.posts-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.posts-table th {
+    background-color: var(--secondary-bg);
+    font-weight: bold;
+}
+
+.checkbox-column {
+    width: 40px;
+}
+
+.title-column {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content-preview {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.875rem;
+}
+
+.status-badge.public {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+.status-badge.private {
+    background-color: var(--secondary-bg);
+    color: var(--secondary-text-color);
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border: none;
+}
+
+.view-btn {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+}
+
+.edit-btn {
+    background-color: rgba(var(--primary-rgb), 0.15);
+    color: rgb(var(--primary-rgb));
+}
+
+.delete-btn {
+    background-color: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+}
+
+.btn-primary {
+    padding: 0.5rem 1rem;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.bulk-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bulk-select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.selected-count {
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+}
+
+.selected-row {
+    background-color: rgba(var(--primary-rgb), 0.05);
+}
+
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 0.5rem 0 0;
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-item {
+    padding: 0.75rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.activity-date {
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem 0 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.pagination button,
+.pagination select {
+    height: 38px;
+}
+
+.pagination button {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    min-width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.pagination button[disabled] {
+    background-color: #eee;
+    color: #bbb;
+    border-color: #eee;
+    cursor: not-allowed;
+}
+
+.pagination button:not([disabled]):hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.12);
+}
+
+.pagination span {
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+    margin: 0 0.4rem;
+}
+
+.pagination select {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+}
