@@ -1,0 +1,198 @@
+
+:root {
+    --border-color: #e0e0e0;
+    --border-color-light: #f0f0f0;
+    --text-color: #333;
+    --text-color-secondary: #666;
+    --blockquote-bg: rgba(0, 0, 0, 0.03);
+    --code-bg: #2d2d2d;
+    --code-color: #ccc;
+    --inline-code-bg: rgba(0, 0, 0, 0.05);
+    --link-color: #0085ff;
+    --placeholder-color: #aaa;
+    --highlight-bg: rgba(74, 110, 224, 0.1);
+    --accent-color: #4a6ee0;
+    --bg-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+
+    --editor-button-bg: rgba(100, 108, 255, 0.1);
+    --editor-button-text: #646cff;
+    --editor-button-hover: rgba(100, 108, 255, 0.2);
+}
+
+[data-theme="dark"] {
+    --border-color: #444;
+    --border-color-light: #333;
+    --text-color: #eee;
+    --text-color-secondary: #bbb;
+    --blockquote-bg: rgba(255, 255, 255, 0.03);
+    --placeholder-color: #888;
+    --highlight-bg: rgba(100, 108, 255, 0.2);
+    --bg-color: #121212;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+
+    --editor-button-bg: rgba(100, 108, 255, 0.2);
+    --editor-button-text: #a5a9ff;
+    --editor-button-hover: rgba(100, 108, 255, 0.4);
+}
+
+.markdown-editor {
+    position: relative;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: var(--bg-color);
+    cursor: text;
+}
+
+.editor-container {
+    min-height: 300px;
+    padding: 1rem;
+    position: relative;
+}
+
+.ce-block {
+    margin-bottom: 12px;
+    position: relative;
+    width: 100%;
+}
+
+.ce-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: text;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.ce-toolbar__content,
+.ce-block__content {
+    max-width: 100% !important;
+}
+
+.ce-block.ce-block--selected .ce-block__content {
+    background-color: var(--editor-button-bg);
+}
+
+
+.ce-paragraph {
+    min-height: 24px;
+    cursor: text !important;
+    padding: 6px 0;
+    line-height: 1.6;
+}
+
+.ce-block--focused {
+    background-color: var(--highlight-bg);
+    border-radius: 3px;
+}
+
+.ce-paragraph[data-placeholder]:empty::before {
+    opacity: 0.8;
+    font-style: italic;
+    pointer-events: none;
+}
+
+.codex-editor {
+    padding-bottom: 150px !important;
+}
+
+.form-actions button,
+.cancel-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: var(--editor-button-bg);
+    color: var(--editor-button-text);
+    border: 1px solid var(--border-color);
+}
+
+.cancel-button:hover {
+    background-color: var(--editor-button-hover);
+}
+
+.submit-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+}
+
+.submit-button:hover {
+    background-color: var(--accent-hover-color);
+}
+
+.ce-header {
+    color: var(--text-color) !important;
+}
+
+.cdx-list {
+    color: var(--text-color) !important;
+}
+
+.cdx-list__item {
+    color: var(--text-color) !important;
+}
+
+.cdx-quote {
+    background-color: var(--blockquote-bg) !important;
+    color: var(--text-color) !important;
+}
+
+.codex-editor ::selection,
+.ce-block ::selection,
+.ce-paragraph ::selection,
+.cdx-block ::selection,
+.ce-header ::selection {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    opacity: 0.3;
+}
+
+.editor-container *::selection {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    opacity: 0.3;
+}
+
+[data-theme="dark"] .codex-editor ::selection,
+[data-theme="dark"] .ce-block ::selection,
+[data-theme="dark"] .ce-paragraph ::selection,
+[data-theme="dark"] .cdx-block ::selection,
+[data-theme="dark"] .ce-header ::selection,
+[data-theme="dark"] .editor-container *::selection {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    opacity: 0.4;
+}
+
+
+.ce-paragraph[data-placeholder]::before {
+    position: absolute;
+    content: attr(data-placeholder);
+    color: var(--placeholder-color);
+    font-weight: normal;
+    opacity: 0.6;
+}
+
+.codex-editor__redactor {
+    padding-bottom: 50px !important;
+}
+
+.editor-container {
+    min-height: 150px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.ce-block--selected .ce-block__content {
+    background-color: var(--highlight-bg);
+}
