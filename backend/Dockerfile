@@ -1,6 +1,9 @@
+FROM gradle:8.7.0-jdk21 AS build
+WORKDIR /app
+COPY . .
+RUN gradle build -x test
+
 FROM openjdk:21-jdk-slim
-
-WORKDIR /APP
-COPY build/libs/blogify-0.0.1-SNAPSHOT.jar app.jar
-
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
